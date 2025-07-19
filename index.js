@@ -5,6 +5,7 @@ import authRoutes from "./routes/User.js"
 import cookieParser from "cookie-parser";
 import booksRouter from "./routes/Book.js"
 import cors from "cors"
+import job from "./lib/cron.js";
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ const ConnectDB=async()=>{
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
+job.start();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/books",booksRouter)
