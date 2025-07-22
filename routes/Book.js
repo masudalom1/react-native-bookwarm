@@ -35,7 +35,7 @@ router.post("/", protectRoute, async (req, res) => {
 // GET all books
 router.get("/", protectRoute, async (req, res) => {
   try {
-    const books = await Book.find();
+    const books = await Book.find().populate("user","username profileImage").sort({createdAt:-1});
     res.status(200).json(books);
   } catch (error) {
     console.error("Error fetching books:", error);
